@@ -67,7 +67,7 @@ Any page can be turned into the model with a YAML profile.
 
 The model renders to Markdown, text, JSON, DOCX, HTML and PDF, styled by design tokens.
 
-- [ ] **TASK-7: Implement the section view and the Markdown, text and JSON generators**
+- [x] **TASK-7: Implement the section view and the Markdown, text and JSON generators**
   - **Associated Acceptance Criteria**: `6.1`, `6.3`, `6.4`, `6.5`, `6.6`
   - **Concrete Steps**:
     1. Write `generators/base.py` (registry, `RenderRequest`, `RenderOptions`) and `view.py` (default order, titles, omission, date display).

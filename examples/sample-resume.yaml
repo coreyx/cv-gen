@@ -1,0 +1,72 @@
+# A fictional person in the cv-gen standard model (a superset of JSON Resume).
+# cv-gen.config.example.yaml builds this file out of the box:
+#   cv-gen build --config cv-gen.config.example.yaml
+basics:
+  name: Alex Rivera
+  label: Senior Backend Engineer
+  headline: I turn slow, fragile services into fast, boring ones.
+  email: alex.rivera@example.com
+  url: https://alexrivera.example.com
+  summary: >-
+    Twelve years building payment and logistics platforms in Go and Python.
+    Happiest owning a system end to end, from the schema to the pager.
+  location: { city: Montréal, region: QC, countryCode: CA }
+  profiles:
+    - { network: GitHub, username: alexrivera-example, url: "https://github.com/alexrivera-example" }
+    - { network: LinkedIn, username: alexrivera-example, url: "https://www.linkedin.com/in/alexrivera-example" }
+
+work:
+  - name: Northwind Freight
+    position: Senior Backend Engineer
+    location: Montréal
+    startDate: 2021-03
+    summary: Routing and tracking services for 4,000 trucks.
+    highlights:
+      - Cut p99 latency of the tracking API from 1.2 s to 140 ms.
+      - Led the move from a monolith to six services without downtime.
+    tags: [employee]
+  - name: Ledgerline
+    position: Backend Engineer
+    startDate: 2016-06
+    endDate: 2021-02
+    summary: Payments platform for small businesses.
+    highlights:
+      - Built the reconciliation engine that settles 2 million transactions a day.
+  - name: Freelance
+    position: Developer
+    startDate: "2013"
+    endDate: "2016"
+    periods:
+      - { startDate: "2013", endDate: "2014" }
+      - { startDate: "2015", endDate: "2016" }
+    summary: Web back ends for local businesses.
+
+projects:
+  - name: tinyqueue
+    description: A durable job queue on SQLite, used in production by three companies.
+    url: https://github.com/alexrivera-example/tinyqueue
+    keywords: [Go, SQLite]
+
+education:
+  - institution: Université de Montréal
+    studyType: BSc
+    area: Computer Science
+    startDate: "2009"
+    endDate: "2012"
+
+skills:
+  - { name: Languages, keywords: [Go, Python, SQL, TypeScript] }
+  - { name: Infrastructure, keywords: [PostgreSQL, Kafka, Kubernetes, Terraform] }
+
+languages:
+  - { language: English, fluency: Native }
+  - { language: French, fluency: Professional }
+
+sections:
+  - id: talks
+    title: Talks
+    items:
+      - title: "Boring queues"
+        subtitle: GopherCon Canada
+        date: 2024-05
+        text: Why the simplest queue that could work usually does.
