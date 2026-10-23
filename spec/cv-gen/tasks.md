@@ -27,7 +27,7 @@ A JSON Resume file can be loaded, validated, merged and resolved through the ada
     2. Write `errors.py`: `CvGenError(message, hint)` and the Pydantic error formatter (`work[0].startDate: …`).
     3. Add a JSON Resume sample fixture and tests for loading, round-tripping extensions and date validation.
 
-- [ ] **TASK-3: Implement configuration and source merging**
+- [x] **TASK-3: Implement configuration and source merging**
   - **Associated Acceptance Criteria**: `5.1`, `5.2`, `10.2`
   - **Concrete Steps**:
     1. Write `merge.py` (`deep_merge` with `replace`/`append`, `None` never erases).
