@@ -1,0 +1,59 @@
+# A web-extraction profile for the fictional "about" page in
+# tests/fixtures/web/about.html. It is the worked example in docs/web-profiles.md:
+# copy it, point the selectors at your own page, and run
+#   cv-gen extract --adapter web -o profile=your-profile.yaml -o url=https://you.example/about
+name: generic-about
+url: https://jordanlee.example.com/about
+
+# Read the schema.org Person JSON-LD first; the fields below override it.
+jsonld: true
+
+# Responsive pages often carry a short and a long variant of the same text.
+# Drop the short one so it never doubles up.
+exclude:
+  - ".mobile-only"
+
+fields:
+  basics.headline: { selector: "header.hero h1", required: true }
+  basics.summary: { selector: "header.hero .lede" }
+
+  basics.profiles:
+    each: "footer .links a"
+    fields:
+      network: { selector: ".net" }
+      username: { selector: ".handle", transforms: [{ strip_prefix: "@" }] }
+      url: { attr: href }
+
+  work:
+    each: "#experience li.job"
+    required: true
+    fields:
+      name: { selector: ".org", required: true }
+      # One element, several fields: "2009–2012, 2014–2016" becomes startDate,
+      # endDate and periods; "Founder. ..." becomes position and summary.
+      ".":
+        - { selector: ".dates", transforms: [date_range] }
+        - { selector: ".desc", transforms: [lead_sentence] }
+      tags: { attr: data-kind, transforms: [as_list] }
+
+  skills:
+    each: "#skills .group"
+    fields:
+      name: { selector: ".label" }
+      keywords: { selector: ".chip", all: true }
+
+  sections:
+    - each: "#now"
+      fields:
+        id: { value: now }
+        title: { selector: "h2" }
+        items:
+          each: ".now-item"
+          fields:
+            title: { selector: "b" }
+            text: { drop: ["b", "a"] }
+    - each: "#story"
+      fields:
+        id: { value: story }
+        title: { selector: "h2" }
+        paragraphs: { selector: "p", all: true }

@@ -25,6 +25,7 @@ ENTRY_POINT_GROUP = "cv_gen.adapters"
 # is not used (the web engine pulls in BeautifulSoup).
 BUILTIN_ADAPTERS = {
     "file": "cv_gen.adapters.file:FileAdapter",
+    "web": "cv_gen.adapters.web.adapter:WebAdapter",
 }
 
 

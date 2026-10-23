@@ -54,7 +54,7 @@ Any page can be turned into the model with a YAML profile.
     2. Write `adapters/web/transforms.py`: the `@transform` registry, `register_module()`, and the built-ins (`normalize`, `regex`, `split`, `strip_prefix`, `strip_suffix`, `date_range`, `lead_sentence`, `as_list`, `absolute_url`, `lower`, `upper`, `replace`, `join`, `map`).
     3. Test every built-in and a module-registered transform.
 
-- [ ] **TASK-6: Implement fetching, JSON-LD, the profile engine and the web adapter**
+- [x] **TASK-6: Implement fetching, JSON-LD, the profile engine and the web adapter**
   - **Associated Acceptance Criteria**: `4.1`, `4.3`, `4.4`, `4.6`
   - **Concrete Steps**:
     1. Write `fetch.py` (http/https/local file, timeout, size cap, User-Agent, errors naming the URL).
