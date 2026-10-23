@@ -1,0 +1,23 @@
+# Python and tooling
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Generated CVs
+out/
+
+# Private configuration: copy cv-gen.config.example.yaml to cv-gen.config.yaml.
+cv-gen.config.yaml
+*.local.yaml
+*.local.json
+
+# Private, site-specific adapter: its own git repository, checked out here.
+cv-gen-corey/

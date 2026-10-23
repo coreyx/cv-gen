@@ -12,7 +12,7 @@ This document defines the implementation plan as a numbered checklist. Each task
 
 A JSON Resume file can be loaded, validated, merged and resolved through the adapter registry.
 
-- [ ] **TASK-1: Set up the project skeleton**
+- [x] **TASK-1: Set up the project skeleton**
   - **Associated Acceptance Criteria**: none (project setup)
   - **Concrete Steps**:
     1. Write `pyproject.toml` (hatchling, `requires-python >=3.11`, dependencies from tech.md, `playwright`/`weasyprint` extras, `cv-gen` script, dev group with pytest, pytest-cov, pypdf, ruff).
