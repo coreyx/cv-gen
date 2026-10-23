@@ -34,7 +34,7 @@ A JSON Resume file can be loaded, validated, merged and resolved through the ada
     2. Write `config.py`: config models, `source`/`sources` sugar, `load_config()` with base-dir resolution and the missing-file hint.
     3. Test merge rules and relative-path resolution from another working directory.
 
-- [ ] **TASK-4: Implement the adapter contract, registry and file adapter**
+- [x] **TASK-4: Implement the adapter contract, registry and file adapter**
   - **Associated Acceptance Criteria**: `2.1`, `2.3`, `2.4`, `2.5`, `3.1`
   - **Concrete Steps**:
     1. Write `adapters/base.py` (`Adapter`, `AdapterOptions` with `extra="forbid"`, `AdapterContext`).
