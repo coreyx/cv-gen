@@ -1,0 +1,24 @@
+{
+  "$description": "A classic serif CV on A4: burgundy accent, Georgia throughout.",
+  "color": {
+    "$type": "color",
+    "burgundy": { "$value": "#7a1f3d", "$description": "8.9:1 on white." },
+    "accent": { "$value": "{color.burgundy}" },
+    "text": { "$value": "#222222" },
+    "muted": { "$value": "#5c5c5c" },
+    "rule": { "$value": { "colorSpace": "srgb", "components": [0.48, 0.12, 0.24], "alpha": 0.35 } }
+  },
+  "font": {
+    "$type": "fontFamily",
+    "body": { "$value": ["Georgia", "Cambria", "Times New Roman", "serif"] }
+  },
+  "font-size": {
+    "$type": "dimension",
+    "name": { "$value": { "value": 24, "unit": "pt" } },
+    "section": { "$value": "11pt" }
+  },
+  "page": {
+    "size": { "$value": "A4" },
+    "margin": { "$type": "dimension", "$value": "18mm" }
+  }
+}

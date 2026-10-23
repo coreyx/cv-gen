@@ -123,7 +123,7 @@ Someone new can install the tool, run the example and write an adapter from the 
     1. Create `examples/adapter-example/` (`pyproject.toml` with the entry point, `src/cv_gen_example_adapter/`, a sample TOML source, tests, README).
     2. Add it to the dev dependency group as a uv path source; confirm `cv-gen adapters list` shows it and its tests pass.
 
-- [ ] **TASK-15: Write the documentation and the example config**
+- [x] **TASK-15: Write the documentation and the example config**
   - **Associated Acceptance Criteria**: `12.3`, `10.1`
   - **Concrete Steps**:
     1. Write `README.md`, `docs/adapters.md`, `docs/web-profiles.md`, `docs/design-tokens.md`, `docs/configuration.md`, `docs/cli.md`, `docs/model.md`, and `CHANGELOG.md`.

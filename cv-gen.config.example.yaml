@@ -1,0 +1,53 @@
+# cv-gen configuration example.
+#
+# Copy this file to cv-gen.config.yaml (git-ignored) and edit the copy:
+#   cp cv-gen.config.example.yaml cv-gen.config.yaml
+#   cv-gen build
+#
+# As written, it builds the fictional sample CV in examples/. Relative paths
+# resolve against this file's folder. Full reference: docs/configuration.md
+
+# Folders to import private plugin modules from (adapters, transforms) without
+# installing them. Keep personal plugins outside the repository or git-ignored.
+plugins:
+  paths: []
+
+sources:
+  # A file already in the standard model (JSON Resume works too).
+  - adapter: file
+    options:
+      path: examples/sample-resume.yaml
+
+  # A web page read through an extraction profile (docs/web-profiles.md):
+  # - adapter: web
+  #   options:
+  #     profile: examples/profiles/generic-about.yaml
+  #     url: https://you.example/about
+
+  # A private overlay with what a public source lacks (email, phone, education).
+  # Files named *.local.yaml are git-ignored.
+  # - adapter: file
+  #   options:
+  #     path: private-overlay.local.yaml
+
+output:
+  dir: out
+  # basename: my-cv               # default: <name>-cv
+  # pdf needs Chrome, Edge or Chromium installed (or the playwright/weasyprint extras).
+  formats: [md, txt, docx, json, html, pdf]
+
+# A DTCG design-tokens file or https URL (docs/design-tokens.md). Omit for the default.
+design: examples/designs/serif.tokens.json
+
+render:
+  # Pick and order sections by id; omit to include all in the default order.
+  # sections: [summary, work, projects, skills, education, languages, talks]
+  section_titles: {}
+  text_width: 80
+
+pdf:
+  engine: auto
+
+guard:
+  # Words that must never appear in any output; a hit writes nothing.
+  forbidden_terms: []
