@@ -47,7 +47,7 @@ A JSON Resume file can be loaded, validated, merged and resolved through the ada
 
 Any page can be turned into the model with a YAML profile.
 
-- [ ] **TASK-5: Implement transforms and date-range parsing**
+- [x] **TASK-5: Implement transforms and date-range parsing**
   - **Associated Acceptance Criteria**: `4.2`, `4.5`
   - **Concrete Steps**:
     1. Write `adapters/web/dates.py` (periods, open ranges, dash variants, `present`).
