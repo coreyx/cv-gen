@@ -33,7 +33,7 @@ class MyOptions(AdapterOptions):
 
 
 class MyAdapter(Adapter):
-    name = "my-format"                 # how configs and the CLI select it
+    name = "my-format"  # how configs and the CLI select it
     description = "My export format."  # shown by `cv-gen adapters list`
     Options = MyOptions
 
@@ -41,14 +41,16 @@ class MyAdapter(Adapter):
         path = ctx.resolve(options.path)  # relative to the config file's folder
         if not path.is_file():
             raise CvGenError(f"no such file: {path}", "check options.path")
-        data = parse_my_format(path)      # your code
-        return Resume.from_data({
-            "basics": {"name": data["full_name"], "label": data["headline"]},
-            "work": [
-                {"name": job["org"], "position": job["title"], "startDate": job["from"]}
-                for job in data["jobs"]
-            ],
-        })
+        data = parse_my_format(path)  # your code
+        return Resume.from_data(
+            {
+                "basics": {"name": data["full_name"], "label": data["headline"]},
+                "work": [
+                    {"name": job["org"], "position": job["title"], "startDate": job["from"]}
+                    for job in data["jobs"]
+                ],
+            }
+        )
 ```
 
 What each part does:
