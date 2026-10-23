@@ -81,7 +81,7 @@ The model renders to Markdown, text, JSON, DOCX, HTML and PDF, styled by design 
     2. Write `design/theme.py` (semantic token table, typed validators, CSS custom properties, `customCss`/`fontImports` for local files only, ignored-token report) and `default.tokens.json`.
     3. Test values, aliases, injection rejection, hash pinning and the URL/local distinction.
 
-- [ ] **TASK-9: Implement the DOCX generator**
+- [x] **TASK-9: Implement the DOCX generator**
   - **Associated Acceptance Criteria**: `6.2`, `9.6`
   - **Concrete Steps**:
     1. Write `generators/docx.py`: Title/Heading styles, entries, bullets, links as text, core properties, theme fonts and accent color.
