@@ -101,7 +101,7 @@ The model renders to Markdown, text, JSON, DOCX, HTML and PDF, styled by design 
     2. Write `generators/pdf.py` (HTML from the HTML generator, rendered in a temporary folder).
     3. Test a real render with pypdf text extraction (skipped without a browser) and the no-engine path.
 
-- [ ] **TASK-12: Implement the render pipeline and the output guard**
+- [x] **TASK-12: Implement the render pipeline and the output guard**
   - **Associated Acceptance Criteria**: `14.1`
   - **Concrete Steps**:
     1. Write `guard.py` and `pipeline.render()`/`write()` (render all in memory, guard, write, per-format errors).
