@@ -139,7 +139,7 @@ Someone new can install the tool, run the example and write an adapter from the 
 
 The private adapter turns the live About page into every format.
 
-- [ ] **TASK-17: Create the private cv-gen-corey package**
+- [x] **TASK-17: Create the private cv-gen-corey package**
   - **Associated Acceptance Criteria**: `13.1`, `13.2`, `13.4`
   - **Concrete Steps**:
     1. Create `cv-gen-corey/` as its own git repository: `pyproject.toml`, `src/cv_gen_corey/` with the About profile, transforms and the Neon Underground tokens, a saved copy of the page, tests and README.
