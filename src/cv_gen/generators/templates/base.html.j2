@@ -1,0 +1,30 @@
+{#- The page skeleton. Override any template by putting a file with the same name in
+    the directory render.templates points at; the others fall back to these. -#}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ head.name }}{% if head.label %} – {{ head.label }}{% endif %}</title>
+<meta name="author" content="{{ head.name }}">
+{% if resume.basics.summary %}<meta name="description" content="{{ resume.basics.summary | truncate(300) }}">
+{% endif %}
+<meta name="generator" content="cv-gen {{ version }}">
+{% for url in theme.font_imports %}<link rel="stylesheet" href="{{ url }}">
+{% endfor %}
+<style>
+{{ styles }}
+</style>
+<script type="application/ld+json">{{ jsonld | safe }}</script>
+</head>
+<body>
+<div class="cv">
+{% include "header.html.j2" %}
+<main>
+{% for section in sections %}
+{% include "section.html.j2" %}
+{% endfor %}
+</main>
+</div>
+</body>
+</html>

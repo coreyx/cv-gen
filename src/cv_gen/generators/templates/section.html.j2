@@ -1,0 +1,31 @@
+<section class="cv-section cv-section--{{ section.layout }}" id="{{ section.id }}">
+  <h2 class="cv-section__title">{{ section.title }}</h2>
+  {% if section.updated %}<p class="cv-updated">Updated {{ section.updated }}</p>{% endif %}
+  {% for paragraph in section.paragraphs %}<p class="cv-paragraph">{{ paragraph }}</p>
+  {% endfor %}
+  {% if section.layout == "entries" %}
+  {% for entry in section.entries %}
+  {% include "entry.html.j2" %}
+  {% endfor %}
+  {% elif section.layout == "keywords" %}
+  <dl class="cv-groups">
+    {% for entry in section.entries %}
+    <div class="cv-group">
+      <dt>{{ entry.title }}{% if entry.subtitle %} <span class="cv-level">({{ entry.subtitle }})</span>{% endif %}</dt>
+      <dd>{{ entry.keywords | join(", ") }}</dd>
+    </div>
+    {% endfor %}
+  </dl>
+  {% elif section.entries %}
+  <ul class="cv-list">
+    {% for entry in section.entries %}
+    <li>
+      {%- if entry.title %}<strong>{% if entry.url | safe_url %}<a href="{{ entry.url | safe_url }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}</strong>{% endif -%}
+      {%- if entry.subtitle %}, {{ entry.subtitle }}{% endif -%}
+      {%- if entry.dates %} <span class="cv-dates">({{ entry.dates }})</span>{% endif -%}
+      {%- if entry.summary %}{% if entry.title %} — {% endif %}{{ entry.summary }}{% endif -%}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>

@@ -87,7 +87,7 @@ The model renders to Markdown, text, JSON, DOCX, HTML and PDF, styled by design 
     1. Write `generators/docx.py`: Title/Heading styles, entries, bullets, links as text, core properties, theme fonts and accent color.
     2. Test by reading the document back with python-docx.
 
-- [ ] **TASK-10: Implement the HTML generator**
+- [x] **TASK-10: Implement the HTML generator**
   - **Associated Acceptance Criteria**: `7.1`, `7.2`, `7.3`
   - **Concrete Steps**:
     1. Write the Jinja2 templates (`base.html.j2` and section partials) with autoescape, print CSS and the theme's variables.

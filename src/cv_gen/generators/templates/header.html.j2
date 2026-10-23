@@ -1,0 +1,15 @@
+<header class="cv-header">
+  <h1 class="cv-name">{{ head.name }}</h1>
+  {% if head.label %}<p class="cv-label">{{ head.label }}</p>{% endif %}
+  {% if head.headline %}<p class="cv-headline">{{ head.headline }}</p>{% endif %}
+  {% if head.contacts %}
+  <ul class="cv-contacts">
+    {% for c in head.contacts %}
+    <li class="cv-contact cv-contact--{{ c.kind | lower | replace(' ', '-') }}">
+      {%- if c.kind not in ("location", "email", "phone", "url") %}<span class="cv-contact__network">{{ c.kind }}</span> {% endif -%}
+      {%- if c.url | safe_url %}<a href="{{ c.url | safe_url }}">{{ c.text }}</a>{% else %}{{ c.text }}{% endif -%}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</header>

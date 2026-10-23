@@ -1,0 +1,20 @@
+<article class="cv-entry">
+  <header class="cv-entry__head">
+    <h3 class="cv-entry__title">{% if entry.url | safe_url %}<a href="{{ entry.url | safe_url }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}</h3>
+    {% if entry.meta %}
+    <p class="cv-meta">
+      {%- if entry.subtitle %}<span class="cv-subtitle">{{ entry.subtitle }}</span>{% endif -%}
+      {%- if entry.dates %}<span class="cv-dates">{{ entry.dates }}</span>{% endif -%}
+      {%- if entry.location %}<span class="cv-location">{{ entry.location }}</span>{% endif -%}
+    </p>
+    {% endif %}
+  </header>
+  {% if entry.summary %}<p class="cv-summary">{{ entry.summary }}</p>{% endif %}
+  {% if entry.bullets %}
+  <ul class="cv-bullets">
+    {% for bullet in entry.bullets %}<li>{{ bullet }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if entry.keywords %}<p class="cv-keywords">{{ entry.keywords | join(", ") }}</p>{% endif %}
+</article>
