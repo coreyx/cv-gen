@@ -94,7 +94,7 @@ The model renders to Markdown, text, JSON, DOCX, HTML and PDF, styled by design 
     2. Write `generators/html.py` (template-directory override with fallback, JSON-LD Person builder).
     3. Test escaping, JSON-LD and template override.
 
-- [ ] **TASK-11: Implement the PDF engines and generator**
+- [x] **TASK-11: Implement the PDF engines and generator**
   - **Associated Acceptance Criteria**: `8.1`, `8.2`
   - **Concrete Steps**:
     1. Write `pdf/engines.py` (`chrome` executable discovery and invocation, `playwright`, `weasyprint`, `auto` order, install hints).
