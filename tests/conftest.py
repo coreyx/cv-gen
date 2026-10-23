@@ -39,3 +39,13 @@ def http_server(http_root: Path) -> Iterator[str]:
     finally:
         server.shutdown()
         server.server_close()
+
+
+@pytest.fixture(autouse=True)
+def isolated_working_directory(tmp_path_factory: pytest.TempPathFactory, monkeypatch) -> None:
+    """Run every test from an empty folder.
+
+    Commands read ./cv-gen.config.yaml when it exists, so a developer's own
+    (git-ignored) configuration in the checkout must not leak into the tests.
+    """
+    monkeypatch.chdir(tmp_path_factory.mktemp("cwd"))
