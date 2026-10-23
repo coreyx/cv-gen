@@ -103,3 +103,18 @@ def test_length_conversion() -> None:
     assert length("1pc", Pt(1)) == Pt(12)
     assert length("1.5rem", Pt(7)) == Pt(7)
     assert length("nonsense", Pt(7)) == Pt(7)
+
+
+def test_core_properties_fit_word_limits() -> None:
+    """Long skill lists and names are trimmed to Word's 255-character property limit."""
+    data = SAMPLE.to_data()
+    data["basics"]["name"] = "N" * 300
+    data["skills"] = [
+        {"name": f"Group {i}", "keywords": [f"skill-{i}-{j}" for j in range(8)]} for i in range(20)
+    ]
+    document, _ = render(Resume.from_data(data))
+    props = document.core_properties
+    words = {w for group in data["skills"] for w in [group["name"], *group["keywords"]]}
+    assert 200 < len(props.keywords) <= 255
+    assert set(props.keywords.split(", ")) <= words, "no keyword is cut in half"
+    assert len(props.title) == 255 and props.title.endswith("…")
