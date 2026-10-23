@@ -20,7 +20,7 @@ A JSON Resume file can be loaded, validated, merged and resolved through the ada
     3. Write `.gitignore` (venv, caches, `out/`, `cv-gen.config.yaml`, `*.local.yaml`, `cv-gen-corey/`), `.gitattributes`, ruff and pytest settings, and an MIT `LICENSE`.
     4. `uv sync` and confirm `uv run pytest` runs.
 
-- [ ] **TASK-2: Implement the standard resume model and error formatting**
+- [x] **TASK-2: Implement the standard resume model and error formatting**
   - **Associated Acceptance Criteria**: `1.1`, `1.3`, `1.4`
   - **Concrete Steps**:
     1. Write `model.py`: every JSON Resume section, the extensions, `PartialDate`, `extra="allow"`, `Resume.load()`/`dump()` helpers.
