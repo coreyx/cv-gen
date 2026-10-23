@@ -1,6 +1,7 @@
 {#- Every value below comes from the validated theme, never straight from a file. -#}
 {{ theme.css_variables() }}
-@page { size: {{ theme.value("page.size") }}; margin: {{ theme.value("page.margin") }}; }
+{#- The @page background paints the margins too, so a colored design prints full-bleed. -#}
+@page { size: {{ theme.value("page.size") }}; margin: {{ theme.value("page.margin") }}; background: {{ theme.value("color.background") }}; }
 *, *::before, *::after { box-sizing: border-box; }
 html { background: var(--cv-color-background); }
 body {

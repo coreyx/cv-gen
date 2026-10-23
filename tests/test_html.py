@@ -77,7 +77,7 @@ def test_page_structure_and_theme(tmp_path: Path) -> None:
     assert html.count('<h2 class="cv-section__title">') == 7
     assert "--cv-color-accent: #ff2bd6;" in html
     assert '--cv-font-body: "Calibri"' in html, "CSS inside <style> must not be HTML-escaped"
-    assert "@page { size: A4; margin: 0.6in; }" in html
+    assert "@page { size: A4; margin: 0.6in; background: #ffffff; }" in html
     assert '<a href="mailto:alex.rivera@example.com">' in html
     assert "<dt>Languages</dt>" in html
 
