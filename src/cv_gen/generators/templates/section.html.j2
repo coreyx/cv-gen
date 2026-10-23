@@ -23,7 +23,9 @@
       {%- if entry.title %}<strong>{% if entry.url | safe_url %}<a href="{{ entry.url | safe_url }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}</strong>{% endif -%}
       {%- if entry.subtitle %}, {{ entry.subtitle }}{% endif -%}
       {%- if entry.dates %} <span class="cv-dates">({{ entry.dates }})</span>{% endif -%}
-      {%- if entry.summary %}{% if entry.title %} — {% endif %}{{ entry.summary }}{% endif -%}
+      {%- if entry.title %}{% if entry.summary %} — {{ entry.summary }}{% endif %}
+      {%- elif entry.url | safe_url %}<a href="{{ entry.url | safe_url }}">{{ entry.summary or entry.url }}</a>
+      {%- else %}{{ entry.summary }}{% endif -%}
     </li>
     {% endfor %}
   </ul>

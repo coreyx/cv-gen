@@ -295,7 +295,7 @@ def _builtin(resume: Resume, section_id: str) -> tuple[Layout, list[str], list[E
 
 def _has_content(entry: Entry) -> bool:
     """Tell whether an entry carries anything worth printing."""
-    return bool(entry.title or entry.summary or entry.bullets or entry.keywords)
+    return bool(entry.title or entry.summary or entry.url or entry.bullets or entry.keywords)
 
 
 def sections(resume: Resume, options: RenderOptions | None = None) -> list[ViewSection]:

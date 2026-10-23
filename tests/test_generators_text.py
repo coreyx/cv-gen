@@ -165,3 +165,30 @@ def test_minimal_resume_renders() -> None:
     tiny = Resume.from_data({"basics": {"name": "Solo"}})
     assert render_markdown(tiny, request()) == "# Solo\n"
     assert render_text(tiny, request()) == "SOLO\n====\n"
+
+
+def test_untitled_list_item_links_its_text() -> None:
+    """A list item with a link but no title turns its text into the link."""
+    resume = Resume.from_data(
+        {
+            "basics": {"name": "A"},
+            "sections": [
+                {
+                    "id": "now",
+                    "title": "Now",
+                    "items": [
+                        {"text": "Available for work.", "url": "https://a.example/contact"},
+                        {"url": "https://a.example/only-a-link"},
+                    ],
+                }
+            ],
+        }
+    )
+    output = render_markdown(resume, request())
+    assert "- [Available for work.](https://a.example/contact)" in output
+    assert "- [https://a.example/only-a-link](https://a.example/only-a-link)" in output
+    from cv_gen.generators.html import render_html
+
+    html = render_html(resume, request())
+    assert '<a href="https://a.example/contact">Available for work.</a>' in html
+    assert '<a href="https://a.example/only-a-link">https://a.example/only-a-link</a>' in html

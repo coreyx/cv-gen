@@ -57,8 +57,9 @@ def _list_line(entry: Entry) -> str:
     if entry.dates:
         head += f" ({escape(entry.dates)})"
     body = escape(entry.summary) if entry.summary else ""
-    if not head and not body and entry.url:
-        body = link(entry.url, entry.url)
+    if not entry.title and entry.url:
+        # With no title to carry the link, the text itself becomes the link.
+        body = link(entry.summary or entry.url, entry.url)
     return "- " + (f"{head} — {body}" if head and body else head or body)
 
 
