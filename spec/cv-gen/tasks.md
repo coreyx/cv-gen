@@ -111,7 +111,7 @@ The model renders to Markdown, text, JSON, DOCX, HTML and PDF, styled by design 
 
 Someone new can install the tool, run the example and write an adapter from the docs.
 
-- [ ] **TASK-13: Implement the CLI**
+- [x] **TASK-13: Implement the CLI**
   - **Associated Acceptance Criteria**: `1.2`, `2.2`, `9.5`, `10.3`, `10.4`, `11.1`, `11.2`, `11.3`, `11.4`
   - **Concrete Steps**:
     1. Write `console.py` (UTF-8 setup) and `cli.py` (every command, shared options, `--debug`, error printing).
