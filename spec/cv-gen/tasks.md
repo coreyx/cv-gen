@@ -129,7 +129,7 @@ Someone new can install the tool, run the example and write an adapter from the 
     1. Write `README.md`, `docs/adapters.md`, `docs/web-profiles.md`, `docs/design-tokens.md`, `docs/configuration.md`, `docs/cli.md`, `docs/model.md`, and `CHANGELOG.md`.
     2. Write `examples/sample-resume.yaml`, `examples/designs/` sample tokens, and `cv-gen.config.example.yaml` that builds the sample out of the box.
 
-- [ ] **TASK-16: Reach the coverage target and verify offline**
+- [x] **TASK-16: Reach the coverage target and verify offline**
   - **Associated Acceptance Criteria**: `15.1`, `15.2`
   - **Concrete Steps**:
     1. Run the suite with coverage, add tests for uncovered branches until line coverage is at least 80%.

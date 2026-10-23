@@ -52,7 +52,7 @@ packages = ["src/cv_gen"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "examples/adapter-example/tests"]
-addopts = "-ra --strict-markers"
+addopts = "-ra --strict-markers --cov --cov-report=term --cov-fail-under=80"
 markers = ["browser: needs an installed Chromium-family browser"]
 
 [tool.coverage.run]

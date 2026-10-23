@@ -55,6 +55,16 @@ def test_help_lists_every_command(capsys) -> None:
     assert "list" in out and "show" in out
     code, out, _ = run(capsys, "--version")
     assert out.startswith("cv-gen ")
+    code, out, _ = run(capsys, "formats")
+    assert code == 0
+    assert [line.split()[0] for line in out.splitlines()] == [
+        "md",
+        "txt",
+        "docx",
+        "json",
+        "html",
+        "pdf",
+    ]
 
 
 def test_render_writes_exactly_the_requested_files(capsys, tmp_path: Path) -> None:
