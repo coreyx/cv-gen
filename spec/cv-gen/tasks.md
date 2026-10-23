@@ -74,7 +74,7 @@ The model renders to Markdown, text, JSON, DOCX, HTML and PDF, styled by design 
     2. Write `markdown.py`, `text.py` (wrapping, underlines) and `jsonout.py`.
     3. Test structure, wrapping, schema validity, section selection and empty-section omission.
 
-- [ ] **TASK-8: Implement design-token loading and the theme**
+- [x] **TASK-8: Implement design-token loading and the theme**
   - **Associated Acceptance Criteria**: `9.1`, `9.2`, `9.3`, `9.4`
   - **Concrete Steps**:
     1. Write `design/tokens.py` (DTCG JSON/YAML, groups, `$type` inheritance, aliases with cycle detection, URL fetch with sha256 pin).

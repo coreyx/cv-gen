@@ -9,10 +9,10 @@ import pytest
 from cv_gen.adapters import AdapterContext
 from cv_gen.adapters.web import WebAdapter, WebOptions
 from cv_gen.adapters.web.engine import evaluate, parse_html, set_path
-from cv_gen.adapters.web.fetch import decode, fetch_bytes, is_loopback, read_text
 from cv_gen.adapters.web.jsonld import person_to_basics, profile_from_url
 from cv_gen.adapters.web.profile import FieldSpec, load_profile
 from cv_gen.errors import CvGenError
+from cv_gen.fetch import decode, fetch_bytes, is_loopback, read_text
 
 ROOT = Path(__file__).parent.parent
 PAGE = ROOT / "tests" / "fixtures" / "web" / "about.html"

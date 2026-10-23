@@ -9,10 +9,10 @@ from pydantic import Field, ValidationError
 
 from cv_gen.adapters.base import Adapter, AdapterContext, AdapterOptions
 from cv_gen.adapters.web.engine import parse_html, run_profile
-from cv_gen.adapters.web.fetch import DEFAULT_TIMEOUT, read_text
 from cv_gen.adapters.web.jsonld import find_person, person_to_basics
 from cv_gen.adapters.web.profile import Profile, load_profile
 from cv_gen.errors import CvGenError, from_validation
+from cv_gen.fetch import DEFAULT_TIMEOUT, read_text
 from cv_gen.merge import deep_merge
 from cv_gen.model import Resume, prune
 

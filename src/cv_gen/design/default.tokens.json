@@ -1,0 +1,45 @@
+{
+  "$description": "cv-gen's built-in design: neutral, print-first, WCAG 2.2 AA text contrast on white.",
+  "color": {
+    "$type": "color",
+    "text": { "$value": "#1f2328", "$description": "Body text. 15.8:1 on white." },
+    "muted": { "$value": "#57606a", "$description": "Dates, locations, meta lines. 6.2:1 on white." },
+    "heading": { "$value": "#1f2328" },
+    "accent": { "$value": "#0b5cad", "$description": "Section rules and the label. 6.6:1 on white." },
+    "link": { "$value": "{color.accent}" },
+    "background": { "$value": "#ffffff" },
+    "rule": { "$value": "#d0d7de" }
+  },
+  "font": {
+    "$type": "fontFamily",
+    "body": { "$value": ["Calibri", "Carlito", "Segoe UI", "Helvetica Neue", "Arial", "sans-serif"] },
+    "heading": { "$value": "{font.body}" },
+    "mono": { "$value": ["Consolas", "Menlo", "DejaVu Sans Mono", "monospace"] }
+  },
+  "font-size": {
+    "$type": "dimension",
+    "base": { "$value": "10.5pt" },
+    "small": { "$value": "9pt" },
+    "name": { "$value": "22pt" },
+    "section": { "$value": "12pt" },
+    "entry": { "$value": "10.5pt" }
+  },
+  "font-weight": {
+    "heading": { "$type": "fontWeight", "$value": 700 }
+  },
+  "line-height": {
+    "base": { "$type": "number", "$value": 1.4 }
+  },
+  "space": {
+    "$type": "dimension",
+    "section": { "$value": "14pt" },
+    "entry": { "$value": "8pt" }
+  },
+  "rule": {
+    "width": { "$type": "dimension", "$value": "1px" }
+  },
+  "page": {
+    "size": { "$value": "Letter" },
+    "margin": { "$type": "dimension", "$value": "0.6in" }
+  }
+}
