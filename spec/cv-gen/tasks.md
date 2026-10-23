@@ -145,7 +145,7 @@ The private adapter turns the live About page into every format.
     1. Create `cv-gen-corey/` as its own git repository: `pyproject.toml`, `src/cv_gen_corey/` with the About profile, transforms and the Neon Underground tokens, a saved copy of the page, tests and README.
     2. Run its tests from the main environment; confirm the main repository ignores it and tracks no site-specific selector.
 
-- [ ] **TASK-18: Wire the private config and build Corey's CV from the live page**
+- [x] **TASK-18: Wire the private config and build Corey's CV from the live page**
   - **Associated Acceptance Criteria**: `13.3`, `10.1`
   - **Concrete Steps**:
     1. Write the git-ignored `cv-gen.config.yaml` (web adapter, the private profile, plugin path, design, render sections), and keep a copy in `cv-gen-corey/`.
