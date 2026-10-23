@@ -37,7 +37,11 @@ dev = [
     "pypdf>=5",
     "jsonschema>=4",
     "ruff>=0.8",
+    "cv-gen-example-adapter",
 ]
+
+[tool.uv.sources]
+cv-gen-example-adapter = { path = "examples/adapter-example", editable = true }
 
 [build-system]
 requires = ["hatchling>=1.26"]
@@ -47,7 +51,7 @@ build-backend = "hatchling.build"
 packages = ["src/cv_gen"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "examples/adapter-example/tests"]
 addopts = "-ra --strict-markers"
 markers = ["browser: needs an installed Chromium-family browser"]
 

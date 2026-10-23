@@ -1,0 +1,36 @@
+# A made-up source format, deliberately unlike the cv-gen model, so the adapter
+# has some mapping to do. Read it with:
+#   cv-gen extract --adapter example-toml -o path=examples/adapter-example/sample-profile.toml
+
+[person]
+name = "Sam Okafor"
+title = "Data Engineer"
+email = "sam.okafor@example.com"
+city = "Lagos"
+country = "NG"
+about = "Builds the pipelines analysts trust and nobody has to babysit."
+links = [
+  "https://github.com/samokafor-example",
+  "https://www.linkedin.com/in/samokafor-example",
+]
+
+[[job]]
+company = "Kudi Analytics"
+role = "Senior Data Engineer"
+from = "2022-02"
+to = "present"
+did = [
+  "Moved nightly batch jobs to streaming; dashboards now lag by minutes, not a day.",
+  "Wrote the data-quality checks that gate every release.",
+]
+
+[[job]]
+company = "Paystack"
+role = "Data Engineer"
+from = "2019-06"
+to = "2022-01"
+did = ["Built the warehouse models finance closes the books on."]
+
+[skills]
+Languages = ["Python", "SQL", "Scala"]
+Data = ["Spark", "dbt", "Airflow", "BigQuery"]

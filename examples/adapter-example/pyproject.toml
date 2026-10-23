@@ -1,0 +1,27 @@
+[project]
+name = "cv-gen-example-adapter"
+version = "0.1.0"
+description = "An example cv-gen source adapter: copy it to write your own."
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = ["cv-gen"]
+
+# This table is what makes the adapter appear in `cv-gen adapters list` once the
+# package is installed: the name on the left is the adapter's name on the command
+# line and in configs; the right side is "module:Class".
+[project.entry-points."cv_gen.adapters"]
+example-toml = "cv_gen_example_adapter:TomlProfileAdapter"
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cv_gen_example_adapter"]
+
+# While developing next to a cv-gen checkout, use that checkout instead of PyPI.
+[tool.uv.sources]
+cv-gen = { path = "../..", editable = true }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

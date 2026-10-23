@@ -430,6 +430,7 @@ weasyprint = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "cv-gen-example-adapter" },
     { name = "jsonschema" },
     { name = "pypdf" },
     { name = "pytest" },
@@ -452,12 +453,24 @@ provides-extras = ["playwright", "weasyprint"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "cv-gen-example-adapter", editable = "examples/adapter-example" },
     { name = "jsonschema", specifier = ">=4" },
     { name = "pypdf", specifier = ">=5" },
     { name = "pytest", specifier = ">=8" },
     { name = "pytest-cov", specifier = ">=5" },
     { name = "ruff", specifier = ">=0.8" },
 ]
+
+[[package]]
+name = "cv-gen-example-adapter"
+version = "0.1.0"
+source = { editable = "examples/adapter-example" }
+dependencies = [
+    { name = "cv-gen" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "cv-gen", editable = "." }]
 
 [[package]]
 name = "fonttools"

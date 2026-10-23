@@ -117,7 +117,7 @@ Someone new can install the tool, run the example and write an adapter from the 
     1. Write `console.py` (UTF-8 setup) and `cli.py` (every command, shared options, `--debug`, error printing).
     2. Test every command with Typer's `CliRunner`, the cp1252 console case and exit codes.
 
-- [ ] **TASK-14: Build the example adapter package**
+- [x] **TASK-14: Build the example adapter package**
   - **Associated Acceptance Criteria**: `12.1`, `12.2`
   - **Concrete Steps**:
     1. Create `examples/adapter-example/` (`pyproject.toml` with the entry point, `src/cv_gen_example_adapter/`, a sample TOML source, tests, README).
