@@ -34,7 +34,7 @@ A job held in separate stretches at one employer can have a different title in e
 ### Shared view
 
 #### [MODIFY] `src/cv_gen/generators/view.py`
-- [ ] **TASK-2:** Add a `Stint` dataclass (`position: str | None`, `dates: str | None`) and an `Entry.stints: list[Stint]` field. Add `stints(periods) -> list[Stint]`. It returns stints only when there are two or more periods and at least one has a `position`, and an empty list otherwise.
+- [x] **TASK-2:** Add a `Stint` dataclass (`position: str | None`, `dates: str | None`) and an `Entry.stints: list[Stint]` field. Add `stints(periods) -> list[Stint]`. It returns stints only when there are two or more periods and at least one has a `position`, and an empty list otherwise.
   - In `_builtin`, `work` and `projects` fill `stints` from their periods.
   - When `stints` is non-empty, the entry's `subtitle` and `dates` are left empty, so the existing `Entry.meta` (used by Markdown and text) carries only the location. Each renderer writes the stints itself, before that.
 

@@ -8,7 +8,7 @@ the :class:`Header` and the :class:`ViewSection` list this module returns.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Literal
+from typing import Any, Literal
 
 from cv_gen.config import RenderOptions
 from cv_gen.errors import CvGenError
@@ -73,8 +73,20 @@ class Header:
 
 
 @dataclass
+class Stint:
+    """One period of an entry with the title held during it."""
+
+    position: str | None
+    dates: str | None
+
+
+@dataclass
 class Entry:
-    """One block in a section, in format-neutral terms."""
+    """One block in a section, in format-neutral terms.
+
+    When ``stints`` is set, it replaces ``subtitle`` and ``dates`` (both left empty):
+    generators write each stint's title beside its own dates, then the location.
+    """
 
     title: str | None = None
     subtitle: str | None = None
@@ -84,6 +96,7 @@ class Entry:
     summary: str | None = None
     bullets: list[str] = field(default_factory=list)
     keywords: list[str] = field(default_factory=list)
+    stints: list[Stint] = field(default_factory=list)
 
     @property
     def meta(self) -> list[str]:
@@ -133,6 +146,30 @@ def format_dates(
     return format_period(start, end)
 
 
+def stints(periods: list[Period] | None) -> list[Stint]:
+    """Pair each period with its title, when an entry has several periods and any title.
+
+    Returns an empty list otherwise, so the entry keeps its single position and dates.
+    """
+    if not periods or len(periods) < 2 or not any(p.position for p in periods):
+        return []
+    return [Stint(p.position, format_period(p.startDate, p.endDate)) for p in periods]
+
+
+def _dated_entry(
+    subtitle: str | None,
+    start: str | None,
+    end: str | None,
+    periods: list[Period] | None,
+    **parts: Any,
+) -> Entry:
+    """Build an entry whose subtitle and dates give way to titled stints when present."""
+    titled = stints(periods)
+    if titled:
+        return Entry(stints=titled, **parts)
+    return Entry(subtitle=subtitle, dates=format_dates(start, end, periods), **parts)
+
+
 def location_text(location: Location | None) -> str | None:
     """Word a location as ``City, Region, Country`` with the parts that are present."""
     if location is None:
@@ -176,10 +213,12 @@ def _builtin(resume: Resume, section_id: str) -> tuple[Layout, list[str], list[E
             "entries",
             [],
             [
-                Entry(
+                _dated_entry(
+                    job.position,
+                    job.startDate,
+                    job.endDate,
+                    job.periods,
                     title=job.name,
-                    subtitle=job.position,
-                    dates=format_dates(job.startDate, job.endDate, job.periods),
                     location=job.location,
                     url=job.url,
                     summary=job.summary or job.description,
@@ -193,10 +232,12 @@ def _builtin(resume: Resume, section_id: str) -> tuple[Layout, list[str], list[E
             "entries",
             [],
             [
-                Entry(
+                _dated_entry(
+                    ", ".join(p.roles) or p.entity,
+                    p.startDate,
+                    p.endDate,
+                    p.periods,
                     title=p.name,
-                    subtitle=", ".join(p.roles) or p.entity,
-                    dates=format_dates(p.startDate, p.endDate, p.periods),
                     url=p.url,
                     summary=p.description,
                     bullets=list(p.highlights),
