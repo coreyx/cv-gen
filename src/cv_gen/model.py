@@ -83,8 +83,13 @@ class Basics(Node):
 
 
 class Period(Node):
-    """One continuous stretch of time; an absent end date means "present"."""
+    """One continuous stretch of time; an absent end date means "present".
 
+    ``position`` names the title held during this stretch, for a job that changed
+    title between stints at the same place.
+    """
+
+    position: str | None = None
     startDate: PartialDate | None = None
     endDate: PartialDate | None = None
 

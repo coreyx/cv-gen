@@ -29,7 +29,7 @@ A job held in separate stretches at one employer can have a different title in e
 ### Model
 
 #### [MODIFY] `src/cv_gen/model.py`
-- [ ] **TASK-1:** Add `position: str | None = None` to `Period`, with its docstring updated to say a period may name the title held during it. Confirm `json_schema()` exposes the field and that a document using it round-trips through `Resume.from_data` / `to_data`.
+- [x] **TASK-1:** Add `position: str | None = None` to `Period`, with its docstring updated to say a period may name the title held during it. Confirm `json_schema()` exposes the field and that a document using it round-trips through `Resume.from_data` / `to_data`.
 
 ### Shared view
 
