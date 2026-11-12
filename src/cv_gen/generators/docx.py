@@ -208,6 +208,19 @@ class _Builder:
             run = paragraph.add_run(text)
             run.font.color.rgb = rgb(self.theme.colors["color.muted"])
 
+    def _stints(self, paragraph: Paragraph, entry: Entry) -> None:
+        """Append each stint as a bold title and muted dates, then the muted location.
+
+        Styled like :meth:`_muted`, so a job with titled periods matches its neighbours.
+        """
+        for index, stint in enumerate(entry.stints):
+            if index:
+                self._muted(paragraph, ", ")
+            self._muted(paragraph, stint.dates or "", stint.position)
+        if entry.location:
+            paragraph.add_run(" · ")
+            self._muted(paragraph, entry.location)
+
     def header(self) -> None:
         """Write the name, label, headline and contact line."""
         head = view.header(self.resume)
@@ -236,7 +249,11 @@ class _Builder:
         heading = self.doc.add_paragraph(entry.title or "", style="Heading 2")
         heading.paragraph_format.keep_with_next = True
         meta = [part for part in (entry.dates, entry.location) if part]
-        if entry.subtitle or meta:
+        if entry.stints:
+            line = self.doc.add_paragraph()
+            line.paragraph_format.keep_with_next = True
+            self._stints(line, entry)
+        elif entry.subtitle or meta:
             line = self.doc.add_paragraph()
             line.paragraph_format.keep_with_next = True
             self._muted(line, " · ".join(meta), entry.subtitle)
