@@ -50,7 +50,7 @@ A job held in separate stretches at one employer can have a different title in e
 - [x] **TASK-5:** In `_Builder.entry`, when `entry.stints` is set, write one meta paragraph with a bold run for each position and a muted run for each period's dates, separated by `, `, then ` · <location>` muted. Keep `keep_with_next`. The read-back text used by the guard (`docx_text`) must contain every position and date.
 
 #### [MODIFY] `src/cv_gen/generators/templates/entry.html.j2` and `styles.css.j2`
-- [ ] **TASK-6:** When `entry.stints` is set, the `cv-meta` paragraph holds one `<span class="cv-stint">` per stint, containing `<span class="cv-subtitle">` and `<span class="cv-dates">`, then the location span. In `styles.css.j2`, the `·` separator applies between a stint's title and dates and before the location, and `, ` goes between stints. The PDF follows from the HTML.
+- [x] **TASK-6:** When `entry.stints` is set, the `cv-meta` paragraph holds one `<span class="cv-stint">` per stint, containing `<span class="cv-subtitle">` and `<span class="cv-dates">`, then the location span. In `styles.css.j2`, the `·` separator applies between a stint's title and dates and before the location, and `, ` goes between stints. The PDF follows from the HTML.
 
 ### Tests and documentation
 

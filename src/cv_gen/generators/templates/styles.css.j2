@@ -38,7 +38,8 @@ h1, h2, h3 { font-family: var(--cv-font-heading); font-weight: var(--cv-font-wei
 .cv-entry { margin-top: var(--cv-space-entry); break-inside: avoid; }
 .cv-entry__title { font-size: var(--cv-font-size-entry); }
 .cv-meta { margin: 1pt 0 0; }
-.cv-meta > span + span::before { content: " · "; }
+.cv-meta > span + span::before, .cv-stint > span + span::before { content: " · "; }
+.cv-meta > .cv-stint + .cv-stint::before { content: ", "; }
 .cv-subtitle { color: var(--cv-color-text); font-weight: var(--cv-font-weight-heading); }
 .cv-summary { margin: 2pt 0 0; }
 .cv-bullets, .cv-list { margin: 2pt 0 0; padding-left: 1.2em; }

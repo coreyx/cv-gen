@@ -1,8 +1,12 @@
 <article class="cv-entry">
   <header class="cv-entry__head">
     <h3 class="cv-entry__title">{% if entry.url | safe_url %}<a href="{{ entry.url | safe_url }}">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}</h3>
-    {% if entry.meta %}
+    {% if entry.meta or entry.stints %}
     <p class="cv-meta">
+      {%- for stint in entry.stints %}<span class="cv-stint">
+        {%- if stint.position %}<span class="cv-subtitle">{{ stint.position }}</span>{% endif -%}
+        {%- if stint.dates %}<span class="cv-dates">{{ stint.dates }}</span>{% endif -%}
+      </span>{% endfor -%}
       {%- if entry.subtitle %}<span class="cv-subtitle">{{ entry.subtitle }}</span>{% endif -%}
       {%- if entry.dates %}<span class="cv-dates">{{ entry.dates }}</span>{% endif -%}
       {%- if entry.location %}<span class="cv-location">{{ entry.location }}</span>{% endif -%}
