@@ -50,10 +50,31 @@ meta:          {canonical, version, lastModified, sources*: [{adapter, location}
 | Field | Why |
 |---|---|
 | `basics.headline` | A one-line tagline, separate from the job `label` ("I turn slow, fragile services into fast, boring ones."). |
-| `periods` (work, projects) | Separate stretches at the same place (`2006–2007, 2010–2013`). `startDate`/`endDate` still give the overall span, for tools that only read those. |
+| `periods` (work, projects) | Separate stretches at the same place (`2006–2007, 2010–2013`). `startDate`/`endDate` still give the overall span, for tools that only read those. Each period may name the `position` held during it; see below. |
 | `tags` (work, projects) | Free-form labels (`founder`, `agency`) for filtering or styling; not printed by default. |
 | `sections` | Content JSON Resume has no place for: a "Current focus" list, an origin story, talks. Rendered as their own sections, placed by `render.sections`. |
 | `meta.sources` | Which adapters produced the document, and from where. |
+
+## Titles per period
+
+A job held in separate stretches can carry a different title in each:
+
+```yaml
+work:
+  - name: Northwind Labs
+    position: Test Analyst, then Platform Engineer   # kept for JSON Resume tools and ATS
+    startDate: "2006"
+    endDate: "2013"
+    periods:
+      - { position: Test Analyst, startDate: "2006", endDate: "2007" }
+      - { position: Platform Engineer, startDate: "2010", endDate: "2013" }
+```
+
+When an entry has two or more periods and at least one names a title, every format shows
+each title beside its own dates (**Test Analyst** · 2006 – 2007, **Platform Engineer** ·
+2010 – 2013) in place of the entry's `position`, which stays in the JSON output. A period
+without a title shows its dates alone. One period, or periods without titles, render as
+the entry's `position` and its dates.
 
 ## Example
 

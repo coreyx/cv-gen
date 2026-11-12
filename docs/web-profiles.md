@@ -54,7 +54,7 @@ record (see [one element, several fields](#one-element-several-fields)).
 | `required` | `true` fails the build when the selector matches nothing. |
 | `default` | The value when an optional selector matches nothing. |
 | `value` | A constant; nothing is read from the page. |
-| `each` + `fields` | One record per element matching `each`; `fields` describe a record, relative to that element. |
+| `each` + `fields` | One record per element matching `each`; `fields` describe a record, relative to that element. No match gives `default` (nothing), like a missing selector. |
 | `fields` (without `each`) | One nested object built inside the matched element. |
 
 Text is read with whitespace collapsed, `<br>` counted as a space, and inline elements
@@ -84,6 +84,26 @@ mapping into the record. Give `"."` a list to merge several:
   - { selector: ".dates", transforms: [date_range] }      # startDate, endDate, periods
   - { selector: ".desc", transforms: [lead_sentence] }    # position, summary
 ```
+
+### A title for each period
+
+When each period is its own element and names the title held during it, read the periods
+as records and list the field after `"."`, so it replaces the periods `date_range` found:
+
+```yaml
+".":
+  - { selector: ".dates", transforms: [date_range] }      # overall startDate, endDate
+periods:
+  each: ".dates .period[data-title]"                     # only periods that name a title
+  fields:
+    ".": { transforms: [date_range] }                     # this period's dates
+    position: { attr: data-title }
+```
+
+Selecting only periods that carry the attribute keeps single-period entries free of a
+redundant `periods` list. When nothing matches, the field is left unset, so periods that
+`date_range` found without titles are kept. See [the model](model.md#titles-per-period) for how titled
+periods render.
 
 ### Custom sections
 

@@ -100,10 +100,16 @@ def evaluate(value_spec: FieldValue, scope: Tag, path: str, base_url: str | None
             matches = [match for root in roots for match in root.select(spec.each)]
             if not matches and spec.required:
                 raise CvGenError(f"{path}: required selector '{spec.each}' matched nothing")
-            result = [
-                build_record(spec.fields or {}, match, f"{path}[{i}]", base_url)
-                for i, match in enumerate(matches)
-            ]
+            # No matches behaves like a missing selector: the default (usually nothing),
+            # so an empty list never overwrites a value an earlier field already set.
+            result = (
+                [
+                    build_record(spec.fields or {}, match, f"{path}[{i}]", base_url)
+                    for i, match in enumerate(matches)
+                ]
+                if matches
+                else spec.default
+            )
         elif not elements:
             if spec.required:
                 raise CvGenError(f"{path}: required selector '{spec.selector}' matched nothing")

@@ -62,7 +62,7 @@ A job held in separate stretches at one employer can have a different title in e
   - The JSON output validates against `cv-gen schema` and keeps both the entry-level and period positions.
 
 #### [MODIFY] `docs/model.md`, `docs/web-profiles.md`, `CHANGELOG.md`
-- [ ] **TASK-8:** Document `periods[].position` in the model guide and how it renders. Add a web-profile example that reads one record per period element, with dates from `date_range` and the title from an attribute, listed after `"."`. Add an `Added` entry under `[Unreleased]`.
+- [x] **TASK-8:** Document `periods[].position` in the model guide and how it renders. Add a web-profile example that reads one record per period element, with dates from `date_range` and the title from an attribute, listed after `"."`. Add an `Added` entry under `[Unreleased]`.
 
 ### Private adapter (cv-gen-corey, its own repository)
 

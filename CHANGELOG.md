@@ -10,6 +10,8 @@ All notable changes to this project are documented here. The format follows
 
 - Standard resume model: JSON Resume 1.0 plus `headline`, `periods`, `tags`, custom
   `sections` and `meta.sources`; JSON Schema export and validation.
+- Titles per period: a period may name the `position` held during it, and every format
+  shows each title beside its own dates for a job held in separate stints.
 - Adapter layer: typed options, discovery through built-ins, the `cv_gen.adapters` entry
   point group, and `module:Class` references on plugin paths.
 - `file` adapter for JSON Resume and YAML/JSON in the standard model.

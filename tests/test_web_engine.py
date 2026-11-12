@@ -326,3 +326,40 @@ def test_extracted_data_that_breaks_the_model(tmp_path: Path) -> None:
     )
     with pytest.raises(CvGenError, match=r"(?s)data extracted from .*work\[0\]\.startDate"):
         run(tmp_path, profile)
+
+
+def test_each_without_matches_keeps_earlier_value(tmp_path: Path) -> None:
+    """An `each` that matches nothing leaves the field unset, so it cannot erase a value
+    that `"."` set first (here, untitled periods found by date_range)."""
+    page = tmp_path / "page.html"
+    page.write_text(
+        '<li class="job"><span class="dates"><span class="p">2006–2007</span>, '
+        '<span class="p">2010–2013</span></span></li>'
+        '<li class="job"><span class="dates"><span class="p" data-title="QA">2014</span>, '
+        '<span class="p" data-title="Lead">2016</span></span></li>',
+        encoding="utf-8",
+    )
+    profile = tmp_path / "profile.yaml"
+    profile.write_text(
+        "jsonld: false\n"
+        "fields:\n"
+        "  work:\n"
+        "    each: li.job\n"
+        "    fields:\n"
+        "      '.': {selector: .dates, transforms: [date_range]}\n"
+        "      periods:\n"
+        "        each: '.p[data-title]'\n"
+        "        fields:\n"
+        "          '.': {transforms: [date_range]}\n"
+        "          position: {attr: data-title}\n",
+        encoding="utf-8",
+    )
+    work = WebAdapter().extract(WebOptions(profile=profile, path=page), AdapterContext()).work
+    assert [(p.startDate, p.endDate, p.position) for p in work[0].periods] == [
+        ("2006", "2007", None),
+        ("2010", "2013", None),
+    ]
+    assert [(p.startDate, p.position) for p in work[1].periods] == [
+        ("2014", "QA"),
+        ("2016", "Lead"),
+    ]
