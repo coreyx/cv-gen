@@ -214,6 +214,14 @@ def date_range(value: Any, ctx: TransformContext) -> Any:
     return parse_date_range(value) if isinstance(value, str) else value
 
 
+# Abbreviations whose period does not end a sentence. Job titles often open with one
+# ("Sr. Software Engineer"), so splitting there would leave a position of "Sr".
+ABBREVIATIONS = frozenset(
+    {"sr", "jr", "snr", "jnr", "dr", "mr", "mrs", "ms", "prof", "st", "vs", "inc", "ltd", "corp"}
+)
+_SENTENCE_END = re.compile(r"\.\s+(?=\S)")
+
+
 @transform("lead_sentence")
 def lead_sentence(
     value: Any,
@@ -225,14 +233,24 @@ def lead_sentence(
     """Split a short opening sentence (a role, say) from the rest of the text.
 
     ``"Founder. Game studio, Paydirt."`` becomes ``{position: "Founder",
-    summary: "Game studio, Paydirt."}`` with the defaults. Text whose first sentence
-    is longer than ``max_words``, or that is a single sentence, goes entirely to
-    ``rest``. Meant for the ``"."`` target.
+    summary: "Game studio, Paydirt."}`` with the defaults. A period after an
+    abbreviation (``Sr.``) or inside an initialism (``U.S.``) does not end the
+    sentence, and lone punctuation such as ``/`` is not counted as a word. Text whose
+    first sentence is longer than ``max_words``, or that is a single sentence, goes
+    entirely to ``rest``. Meant for the ``"."`` target.
     """
     if not isinstance(value, str):
         return value
     text = value.strip()
-    match = re.match(r"^(?P<lead>[^.]+?)\.\s+(?P<rest>\S.*)$", text, re.DOTALL)
-    if match and len(match.group("lead").split()) <= max_words:
-        return {lead: match.group("lead").strip(), rest: match.group("rest").strip()}
+    for end in _SENTENCE_END.finditer(text):
+        head = text[: end.start()].strip()
+        if not head:
+            continue
+        last_word = head.rsplit(None, 1)[-1]
+        if last_word.lower() in ABBREVIATIONS or "." in last_word:
+            continue
+        words = [word for word in head.split() if re.search(r"\w", word)]
+        if len(words) <= max_words:
+            return {lead: head, rest: text[end.end() :]}
+        break
     return {rest: text}

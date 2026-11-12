@@ -106,6 +106,27 @@ def test_to_iso_rejects_garbage() -> None:
             {"summary": "Head of Core Tech. Sensorium Galaxy."},
         ),
         (
+            "lead_sentence",
+            "Sr. Software Engineer. Core tech on two games.",
+            {"position": "Sr. Software Engineer", "summary": "Core tech on two games."},
+        ),
+        (
+            "lead_sentence",
+            "Sr. Unity / Unreal Developer. Mixed reality games.",
+            {"position": "Sr. Unity / Unreal Developer", "summary": "Mixed reality games."},
+        ),
+        (
+            "lead_sentence",
+            "U.S. Navy. Served on a carrier.",
+            {"position": "U.S. Navy", "summary": "Served on a carrier."},
+        ),
+        ("lead_sentence", ". Stray period.", {"summary": ". Stray period."}),
+        (
+            "lead_sentence",
+            "Sr. Engineer at a very large studio. Shipped games.",
+            {"summary": "Sr. Engineer at a very large studio. Shipped games."},
+        ),
+        (
             {"lead_sentence": {"lead": "title", "rest": "text"}},
             "QA Analyst. Hunted for bugs.",
             {"title": "QA Analyst", "text": "Hunted for bugs."},

@@ -141,7 +141,10 @@ work element-wise on lists.
 
 `lead_sentence` turns `Founder. Game studio, Paydirt.` into `position: Founder` and
 `summary: Game studio, Paydirt.`; text whose first sentence is longer than `max_words`
-words, or that is one sentence, goes entirely to `rest`.
+words, or that is one sentence, goes entirely to `rest`. A title's abbreviation does not
+end its sentence: `Sr. Software Engineer. Core tech.` gives `position: Sr. Software Engineer`.
+Initialisms (`U.S.`) are kept whole too, and lone punctuation such as `/` is not counted
+as a word.
 
 ## Custom transforms
 
