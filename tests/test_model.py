@@ -118,3 +118,14 @@ def test_read_document_yaml_and_errors(tmp_path: Path) -> None:
 def test_error_without_hint_prints_message_only() -> None:
     """A CvGenError without a hint is just its message."""
     assert str(CvGenError("nope")) == "nope"
+
+
+def test_period_positions_round_trip_and_validate() -> None:
+    """A period may name the title held during it; both titles survive a round trip."""
+    resume = Resume.load(Path(__file__).parent / "fixtures" / "two-stints.yaml")
+    data = resume.to_data()
+    job = data["work"][0]
+    assert job["position"] == "Test Analyst, then Platform Engineer"
+    assert [p["position"] for p in job["periods"]] == ["Test Analyst", "Platform Engineer"]
+    assert "position" in json_schema()["$defs"]["Period"]["properties"]
+    assert Resume.from_data(data) == resume

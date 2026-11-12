@@ -192,3 +192,46 @@ def test_untitled_list_item_links_its_text() -> None:
     html = render_html(resume, request())
     assert '<a href="https://a.example/contact">Available for work.</a>' in html
     assert '<a href="https://a.example/only-a-link">https://a.example/only-a-link</a>' in html
+
+
+STINTS = Resume.load(ROOT / "tests" / "fixtures" / "two-stints.yaml")
+
+
+def test_stints_pair_titles_with_dates() -> None:
+    """Titled periods become stints; a single period or untitled periods do not."""
+    entries = view.sections(STINTS)[0].entries
+    northwind, contoso, fabrikam, tailspin = entries
+    assert [(s.position, s.dates) for s in northwind.stints] == [
+        ("Test Analyst", "2006 – 2007"),
+        ("Platform Engineer", "2010 – 2013"),
+    ]
+    assert (northwind.subtitle, northwind.dates, northwind.meta) == (None, None, ["Springfield"])
+    assert [s.position for s in contoso.stints] == ["Analyst", None]
+    assert (fabrikam.stints, fabrikam.subtitle, fabrikam.dates) == ([], "Developer", "2017, 2019")
+    assert (tailspin.stints, tailspin.subtitle) == ([], "Lead")
+
+
+def test_markdown_and_text_show_each_title_beside_its_dates() -> None:
+    """Each stint's title sits beside its own dates; the entry-level title is not shown."""
+    markdown = render_markdown(STINTS, request())
+    assert (
+        "**Test Analyst** · 2006 – 2007, **Platform Engineer** · 2010 – 2013 · Springfield"
+        in markdown
+    )
+    assert "**Analyst** · 2014, 2016\n" in markdown
+    assert "**Developer** · 2017, 2019\n" in markdown
+    assert "**Lead** · 2020 – Present\n" in markdown
+    assert "then Platform Engineer" not in markdown
+    text = render_text(STINTS, request())
+    assert "Test Analyst | 2006 – 2007, Platform Engineer | 2010 – 2013 | Springfield" in text
+    assert "Analyst | 2014, 2016\n" in text
+    assert "then Platform Engineer" not in text
+
+
+def test_json_keeps_entry_and_period_titles() -> None:
+    """The JSON output keeps both titles and validates against the schema."""
+    data = json.loads(get_generator("json").render(STINTS, request()))
+    jsonschema.validate(data, json_schema())
+    job = data["work"][0]
+    assert job["position"] == "Test Analyst, then Platform Engineer"
+    assert [p["position"] for p in job["periods"]] == ["Test Analyst", "Platform Engineer"]

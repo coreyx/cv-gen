@@ -55,7 +55,7 @@ A job held in separate stretches at one employer can have a different title in e
 ### Tests and documentation
 
 #### [MODIFY] `tests/test_model.py`, `tests/test_generators_text.py`, `tests/test_docx.py`, `tests/test_html.py`
-- [ ] **TASK-7:** Add tests with a fictional two-period job. Cover:
+- [x] **TASK-7:** Add tests with a fictional two-period job. Cover:
   - Each format shows each title beside its own dates, and the entry-level position doesn't appear on the meta line.
   - A period without a title shows its dates alone.
   - A one-period entry, or periods with no titles, render exactly as before.

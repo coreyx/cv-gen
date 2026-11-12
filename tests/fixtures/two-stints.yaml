@@ -1,0 +1,32 @@
+# A fictional CV with one job held in two stints under different titles, plus the
+# cases that must render as before: untitled periods, and a single period.
+basics:
+  name: Sam Okafor
+work:
+  - name: Northwind Labs
+    position: Test Analyst, then Platform Engineer
+    location: Springfield
+    startDate: "2006"
+    endDate: "2013"
+    periods:
+      - { position: Test Analyst, startDate: "2006", endDate: "2007" }
+      - { position: Platform Engineer, startDate: "2010", endDate: "2013" }
+  - name: Contoso
+    position: Consultant
+    startDate: "2014"
+    endDate: "2016"
+    periods:
+      - { position: Analyst, startDate: "2014", endDate: "2014" }
+      - { startDate: "2016", endDate: "2016" }
+  - name: Fabrikam
+    position: Developer
+    startDate: "2017"
+    endDate: "2019"
+    periods:
+      - { startDate: "2017", endDate: "2017" }
+      - { startDate: "2019", endDate: "2019" }
+  - name: Tailspin
+    position: Lead
+    startDate: "2020"
+    periods:
+      - { position: Lead, startDate: "2020" }

@@ -118,3 +118,16 @@ def test_core_properties_fit_word_limits() -> None:
     assert 200 < len(props.keywords) <= 255
     assert set(props.keywords.split(", ")) <= words, "no keyword is cut in half"
     assert len(props.title) == 255 and props.title.endswith("…")
+
+
+def test_stints_have_bold_titles_beside_their_dates() -> None:
+    """Each period's title is bold beside its muted dates, on one meta line."""
+    stints = Resume.load(ROOT / "tests" / "fixtures" / "two-stints.yaml")
+    document, content = render(stints)
+    line = next(p for p in document.paragraphs if p.text.startswith("Test Analyst"))
+    assert line.text == "Test Analyst · 2006 – 2007, Platform Engineer · 2010 – 2013 · Springfield"
+    assert [run.text for run in line.runs if run.bold] == ["Test Analyst", "Platform Engineer"]
+    assert line.paragraph_format.keep_with_next
+    analyst = next(p for p in document.paragraphs if p.text.startswith("Analyst"))
+    assert analyst.text == "Analyst · 2014, 2016"
+    assert "then Platform Engineer" not in docx_text(content)

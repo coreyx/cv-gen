@@ -120,3 +120,18 @@ def test_safe_url_and_jsonld_helpers() -> None:
         "@type": "Person",
         "name": None,
     }
+
+
+def test_stints_render_as_titled_spans() -> None:
+    """Each period's title and dates sit in their own span; separators come from CSS."""
+    stints = Resume.load(ROOT / "tests" / "fixtures" / "two-stints.yaml")
+    html = render_html(stints, RenderRequest())
+    assert (
+        '<p class="cv-meta"><span class="cv-stint"><span class="cv-subtitle">Test Analyst</span>'
+        '<span class="cv-dates">2006 – 2007</span></span><span class="cv-stint">'
+        '<span class="cv-subtitle">Platform Engineer</span><span class="cv-dates">2010 – 2013'
+        '</span></span><span class="cv-location">Springfield</span></p>'
+    ) in html
+    assert '<span class="cv-stint"><span class="cv-dates">2016</span></span>' in html
+    assert ".cv-meta > .cv-stint + .cv-stint::before" in html
+    assert "then Platform Engineer" not in html.split("<main")[1].split("</main>")[0]
