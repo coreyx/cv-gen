@@ -34,7 +34,14 @@ def _entry(entry: Entry, width: int) -> list[str]:
     lines: list[str] = []
     if entry.title:
         lines += wrap(entry.title, width)
-    if entry.meta:
+    if entry.stints:
+        # Stints stand in for the subtitle and dates; the location (if any) follows.
+        stints = ", ".join(
+            " | ".join(part for part in (stint.position, stint.dates) if part)
+            for stint in entry.stints
+        )
+        lines += wrap(" | ".join([stints, *entry.meta]), width)
+    elif entry.meta:
         lines += wrap(" | ".join(entry.meta), width)
     if entry.url:
         lines += wrap(entry.url, width)

@@ -44,7 +44,7 @@ A job held in separate stretches at one employer can have a different title in e
 - [x] **TASK-3:** In `_entry`, when `entry.stints` is set, write the meta line as `**QA** · 2006 – 2007, **Software Engineer** · 2010 – 2013`, followed by ` · <location>` when present. Positions are escaped and bold, dates escaped; an untitled stint writes its dates only.
 
 #### [MODIFY] `src/cv_gen/generators/text.py`
-- [ ] **TASK-4:** In `_entry`, when `entry.stints` is set, write `QA | 2006 – 2007, Software Engineer | 2010 – 2013`, plus ` | <location>`, wrapped at the configured width like every other meta line.
+- [x] **TASK-4:** In `_entry`, when `entry.stints` is set, write `QA | 2006 – 2007, Software Engineer | 2010 – 2013`, plus ` | <location>`, wrapped at the configured width like every other meta line.
 
 #### [MODIFY] `src/cv_gen/generators/docx.py`
 - [ ] **TASK-5:** In `_Builder.entry`, when `entry.stints` is set, write one meta paragraph with a bold run for each position and a muted run for each period's dates, separated by `, `, then ` · <location>` muted. Keep `keep_with_next`. The read-back text used by the guard (`docx_text`) must contain every position and date.
