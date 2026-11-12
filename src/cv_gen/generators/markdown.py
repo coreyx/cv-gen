@@ -10,7 +10,7 @@ import re
 
 from cv_gen.generators import view
 from cv_gen.generators.base import Generator, RenderRequest
-from cv_gen.generators.view import Entry, ViewSection
+from cv_gen.generators.view import Entry, Stint, ViewSection
 from cv_gen.model import Resume
 
 _SPECIAL = re.compile(r"([\\`*_\[\]<>|])")
@@ -32,10 +32,22 @@ def link(text: str, url: str | None) -> str:
     return f"[{escape(text)}]({url.replace(' ', '%20').replace(')', '%29')})"
 
 
+def _stint(stint: Stint) -> str:
+    """Word one stint as ``**Title** · dates``, or its dates alone when it has no title."""
+    parts = [f"**{escape(stint.position)}**"] if stint.position else []
+    if stint.dates:
+        parts.append(escape(stint.dates))
+    return " · ".join(parts)
+
+
 def _entry(entry: Entry) -> list[str]:
     """Lay out one entry as a ``###`` block."""
     lines = [f"### {link(entry.title, entry.url) if entry.title else 'Untitled'}", ""]
-    if entry.meta:
+    if entry.stints:
+        # Stints stand in for the subtitle and dates; the location (if any) follows.
+        stints = ", ".join(_stint(stint) for stint in entry.stints)
+        lines += [" · ".join([stints, *(escape(part) for part in entry.meta)]), ""]
+    elif entry.meta:
         first, *rest = entry.meta
         parts = [f"**{escape(first)}**" if entry.subtitle else escape(first)]
         parts += [escape(part) for part in rest]

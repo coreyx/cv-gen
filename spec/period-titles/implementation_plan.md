@@ -41,7 +41,7 @@ A job held in separate stretches at one employer can have a different title in e
 ### Renderers
 
 #### [MODIFY] `src/cv_gen/generators/markdown.py`
-- [ ] **TASK-3:** In `_entry`, when `entry.stints` is set, write the meta line as `**QA** · 2006 – 2007, **Software Engineer** · 2010 – 2013`, followed by ` · <location>` when present. Positions are escaped and bold, dates escaped; an untitled stint writes its dates only.
+- [x] **TASK-3:** In `_entry`, when `entry.stints` is set, write the meta line as `**QA** · 2006 – 2007, **Software Engineer** · 2010 – 2013`, followed by ` · <location>` when present. Positions are escaped and bold, dates escaped; an untitled stint writes its dates only.
 
 #### [MODIFY] `src/cv_gen/generators/text.py`
 - [ ] **TASK-4:** In `_entry`, when `entry.stints` is set, write `QA | 2006 – 2007, Software Engineer | 2010 – 2013`, plus ` | <location>`, wrapped at the configured width like every other meta line.
