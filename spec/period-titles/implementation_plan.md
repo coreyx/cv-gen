@@ -67,7 +67,7 @@ A job held in separate stretches at one employer can have a different title in e
 ### Private adapter (cv-gen-corey, its own repository)
 
 #### [MODIFY] `cv-gen-corey/src/cv_gen_corey/profiles/about.yaml`, `cv-gen-corey/tests/fixtures/about.html`, `cv-gen-corey/tests/test_about.py`
-- [ ] **TASK-9:** Once the site change is live, update the profile and tests:
+- [x] **TASK-9:** Once the site change is live, update the profile and tests:
   - Add a `periods` field after `"."` in `work` that reads only the period elements carrying a title attribute: dates through `date_range`, title from the attribute.
   - Re-save the page fixture.
   - Assert the multi-period entry has the period titles QA and Software Engineer, the entry-level position "QA, then Software Engineer", and unchanged overall dates; single-period entries gain no `periods`.
